@@ -1,0 +1,95 @@
+<!-- TestMarks.html -->
+<html lang="en">
+<body>
+<h1>20040968D Dinesh Gautam</h1>
+<h1>20041569D Islam Ahnaf Al</h1>
+<script type="text/javascript">
+    function createRequest() {
+        let xmlhttp;
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        return xmlhttp;
+    }
+
+    function addRecord() {
+        let req = createRequest();
+        let id = document.getElementById("ID");
+        let mark = document.getElementById("Mark");
+        let status = document.getElementById("Status");
+
+        // Complete the code of addRecord() below using the correct HTTP
+        // request for adding records
+        let url = "mark/" + id.value + "," + mark.value;
+        req.onreadystatechange=function() {
+            if (req.readyState===4 && req.status===200) {
+                status.value = req.responseText;
+            }
+        }
+        req.open("POST",url, true);
+        req.send();
+    }
+
+    function getRecord() {
+        let req = createRequest();
+        let id = document.getElementById("ID");
+        let mark = document.getElementById("Mark");
+        let status = document.getElementById("Status");
+
+        // Complete the code of getRecord() below using the correct HTTP
+        // request for retrieving records
+        let url = "mark?id=" + id.value;
+        req.onreadystatechange=function() {
+            if (req.readyState===4 && req.status===200) {
+                status.value = req.responseText;
+            }
+        }
+        req.open("GET",url, true);
+        req.send();
+    }
+
+    function updateRecord() {
+        let req = createRequest();
+        let id = document.getElementById("ID");
+        let mark = document.getElementById("Mark");
+        let status = document.getElementById("Status");
+
+        // Complete the code of updateRecord() below using the correct HTTP
+        // request for updating records
+        let url = "mark/" + id.value + "," + mark.value;
+        req.onreadystatechange=function() {
+            if (req.readyState===4 && req.status===200) {
+                status.value = req.responseText;
+            }
+        }
+        req.open("PUT",url, true);
+        req.send();
+    }
+    function deleteRecord(){
+        let req = createRequest();
+        let id = document.getElementById("ID");
+        let status = document.getElementById("Status");
+        let url = "mark?id=" + id.value;
+        req.onreadystatechange=function() {
+            if (req.readyState===4 && req.status===200) {
+                status.value = req.responseText;
+            }
+        }
+        req.open("DELETE",url, true);
+        req.send();
+    }
+</script>
+
+<label for="ID">ID</label><input type="text" id="ID" size="10" value="">
+<label for="Mark">Mark</label><input type="text" id="Mark" size="5" value="">
+<label for="Status">Status</label><input type="text" id="Status" size="30" value=""><br/>
+
+<button type="button" onclick="addRecord()">Add Record</button>
+<button type="button" onclick="getRecord()">Get Record</button>
+<button type="button" onclick="updateRecord()">Update Record</button>
+<button type="button" onclick="deleteRecord()">Delete Record</button>
+
+</body>
+</html>
